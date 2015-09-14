@@ -1,0 +1,218 @@
+ C-<chr>  means hold the CONTROL key while typing the character <chr>
+	  Thus, C-f would be: hold the CONTROL key and type f.
+ M-<chr>  means hold the META or EDIT or ALT key down while typing <chr>.
+	  If there is no META, EDIT or ALT key, instead press and release the
+	  ESC key and then type <chr>.  We write <ESC> for the ESC
+	  key.
+
+        C-x C-c   Close Emacs session
+        C-g       Quit partially entered command
+	C-v	Move forward one screenful
+	M-v	Move backward one screenful
+	C-l	Clear screen and redisplay all the text,
+		 moving the text around the cursor
+		 to the center of the screen.
+                 
+	C-f	Move forward a character
+	C-b	Move backward a character
+
+	M-f	Move forward a word
+	M-b	Move backward a word
+
+	C-n	Move to next line
+	C-p	Move to previous line
+
+	C-a	Move to beginning of line
+	C-e	Move to end of line
+
+	M-a	Move back to beginning of sentence
+	M-e	Move forward to end of sentence
+
+        M-<     Move back to beginning of text
+        M->     Move forward to end of text
+
+The location of the cursor in the text is called "point".
+
+        C-u <number> Serves as a repeat-count of command
+        M-<number>   Serves as a repeat-count of command
+
+        Using these with C-v/M-v equates to using them with C-n/M-p
+
+C-x C-l   lowercase selected text
+
+C-x 1     Kills windows except the one with the cursor
+
+
+Help key display   >> Move the cursor to this line and type C-u 0 C-l.
+                   >> Type C-h k C-f
+A ('\') on the rightmost screen column of a terminal means line is
+wrapped
+
+Electric:    Behavior of pressing a key to do more than one thing
+
+        <DEL>        Delete the character just before the cursor
+                     <Del> refers to Backspace not Delete
+	C-d   	     Delete the next character after the cursor
+
+	M-<DEL>      Kill the word immediately before the cursor
+	M-d	     Kill the next word after the cursor
+
+	C-k	     Kill from the cursor position to end of line
+	M-k	     Kill to the end of the current sentence
+
+        C-<SPC>      Mark point
+        C-w          Kill text between marked points
+        C-y          Yank
+        C-/          Undo (also C-_ or C-x u)
+        
+<DEL> and C-d do deletion in the simplest case, with no argument.
+When given an argument, they kill instead.
+
+Note that a single C-k kills the contents of the line, and a second
+C-k kills the line itself, and makes all the other lines move up. C-k treats a numeric argument specially: it kills that many lines AND
+their contents.  This is not mere repetition.  C-u 2 C-k kills two lines and their Newlines; typing C-k twice would not do that.
+
+M-x yank-pop instead of M-y
+
+
+* FILES
+-------
+
+In order to make the text you edit permanent, you must put it in a
+file.  Otherwise, it will go away when you exit Emacs.  In order to
+put your text in a file, you must "find" the file before you enter the
+text.  (This is also called "visiting" the file.)
+
+Finding a file means that you see the contents of the file within
+Emacs.  In many ways, it is as if you were editing the file itself.
+However, the changes you make using Emacs do not become permanent
+until you "save" the file.  This is so you can avoid leaving a
+half-changed file on the system when you do not want to.  Even when
+you save, Emacs leaves the original file under a changed name in case
+you later decide that your changes were a mistake.
+
+If you look near the bottom of the screen you will see a line that
+begins with dashes, and starts with " -:---  TUTORIAL" or something
+like that.  This part of the screen normally shows the name of the
+file that you are visiting.  Right now, you are visiting your personal
+copy of the Emacs tutorial, which is called "TUTORIAL".  When you find
+a file with Emacs, that file's name will appear in that precise spot.
+
+One special thing about the command for finding a file is that you
+have to say what file name you want.  We say the command "reads an
+argument" (in this case, the argument is the name of the file).  After
+you type the command
+
+	C-x C-f   Find a file
+** C-x C-f has been rebound, but you can use <open> instead [More] **
+
+Emacs asks you to type the file name.  The file name you type appears
+on the bottom line of the screen.  The bottom line is called the
+minibuffer when it is used for this sort of input.  You can use
+ordinary Emacs editing commands to edit the file name.
+
+While you are entering the file name (or any minibuffer input),
+you can cancel the command with C-g.
+
+>> Type C-x C-f, then type C-g.  This cancels the minibuffer,
+   and also cancels the C-x C-f command that was using the
+   minibuffer.  So you do not find any file.
+
+When you have finished entering the file name, type <Return> to
+terminate it.  The minibuffer disappears, and the C-x C-f command goes
+to work to find the file you chose.
+
+The file contents now appear on the screen, and you can edit the
+contents.  When you wish to make your changes permanent, type the
+command
+
+	C-x C-s   Save the file
+
+This copies the text within Emacs into the file.  The first time you
+do this, Emacs renames the original file to a new name so that it is
+not lost.  The new name is made by adding "~" to the end of the
+original file's name.  When saving is finished, Emacs displays the
+name of the file written.
+
+>> Type C-x C-s TUTORIAL <Return>.
+   This should save this tutorial to a file named TUTORIAL, and show
+   "Wrote ...TUTORIAL" at the bottom of the screen.
+
+You can find an existing file, to view it or edit it.  You can also
+find a file which does not already exist.  This is the way to create a
+file with Emacs: find the file, which starts out empty, and then begin
+inserting the text for the file.  When you ask to "save" the file,
+Emacs actually creates the file with the text that you have inserted.
+From then on, you can consider yourself to be editing an already
+existing file.
+
+
+* BUFFERS
+---------
+
+If you find a second file with C-x C-f, the first file remains
+inside Emacs.  You can switch back to it by finding it again with
+C-x C-f.  This way you can get quite a number of files inside Emacs.
+
+Emacs stores each file's text inside an object called a "buffer".
+Finding a file makes a new buffer inside Emacs.  To see a list of the
+buffers that currently exist, type
+
+	C-x C-b   List buffers
+
+>> Try C-x C-b now.
+
+See how each buffer has a name, and it may also have a file name for
+the file whose contents it holds.  ANY text you see in an Emacs window
+is always part of some buffer.
+
+>> Type C-x 1 to get rid of the buffer list.
+
+When you have several buffers, only one of them is "current" at any
+time.  That buffer is the one you edit.  If you want to edit another
+buffer, you need to "switch" to it.  If you want to switch to a buffer
+that corresponds to a file, you can do it by visiting the file again
+with C-x C-f.  But there is an easier way: use the C-x b command.
+** C-x b has been rebound, but you can use the `Buffers' menu instead [More] **
+In that command, you have to type the buffer's name.
+
+>> Create a file named "foo" by typing C-x C-f foo <Return>.
+   Then type C-x b TUTORIAL <Return> to come back to this tutorial.
+
+Most of the time, the buffer's name is the same as the file name
+(without the file directory part).  However, this is not always true.
+The buffer list you make with C-x C-b shows you both the buffer name
+and the file name of every buffer.
+
+Some buffers do not correspond to files.  The buffer named
+"*Buffer List*", which contains the buffer list that you made with
+C-x C-b, does not have any file.  This TUTORIAL buffer initially did
+not have a file, but now it does, because in the previous section you
+typed C-x C-s and saved it to a file.
+
+The buffer named "*Messages*" also does not correspond to any file.
+This buffer contains the messages that have appeared on the bottom
+line during your Emacs session.
+
+>> Type C-x b *Messages* <Return> to look at the buffer of messages.
+   Then type C-x b TUTORIAL <Return> to come back to this tutorial.
+
+If you make changes to the text of one file, then find another file,
+this does not save the first file.  Its changes remain inside Emacs,
+in that file's buffer.  The creation or editing of the second file's
+buffer has no effect on the first file's buffer.  This is very useful,
+but it also means that you need a convenient way to save the first
+file's buffer.  Having to switch back to that buffer, in order to save
+it with C-x C-s, would be a nuisance.  So we have
+
+	C-x s     Save some buffers
+
+C-x s asks you about each buffer which contains changes that you have
+not saved.  It asks you, for each such buffer, whether to save the
+buffer.
+
+>> Insert a line of text, then type C-x s.
+   It should ask you whether to save the buffer named TUTORIAL.
+   Answer yes to the question by typing "y".
+
+

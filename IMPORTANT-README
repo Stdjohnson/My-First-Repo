@@ -1,0 +1,14 @@
+Do not delete, move, or rename the pre-configured files in this directory.
+
+This directory contains subdirectories important to the functioning of
+your system. Do not delete, rename, or move them unless you know what
+you're doing.
+
+bib: The org-ref functionality of Org Mode is set up to look for and
+to create your personal bibliography files in this directory
+
+book: This directory is pre-configured to pull the book for this class
+from Kevin Sullivan's GitHub account
+
+org: Org Mode on this computer is set up to store your evolving agenda
+files in this directory
